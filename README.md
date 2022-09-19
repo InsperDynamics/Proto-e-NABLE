@@ -4,4 +4,4 @@ ProtoSnake is a project that started with the idea of making a prosthetic finger
 
 # Compile
 
-To compile the code you need to use the (PlatformIO IDE)[https://platformio.org/]
+To compile the code you need to use the [PlatformIO IDE](https://platformio.org/)
