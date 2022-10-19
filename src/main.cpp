@@ -1,7 +1,7 @@
 #include <Arduino.h>
 #include <Servo.h>
 
-int delayTime = 24;              // The delay time between each step in milliseconds max (45)
+int delayTime = 248;              // The delay time between each step in milliseconds max (45)
 int updateList[] = {0, 2, 4, 6}; // Array containing the servos that should be updated in each loop (0-7)
 
 int minAngle = 40;  // The minimum angle of the servo
@@ -9,7 +9,7 @@ int maxAngle = 170; // The maximum angle of the servo
 
 Servo servos[] = {Servo(), Servo(), Servo(), Servo(), Servo(), Servo(), Servo(), Servo()};
 
-uint8_t step[] = {4, 4, 4, 4, 4, 4, 4, 4}; // The step value for each servo
+int8_t step[] = {4, 4, 4, 4, 4, 4, 4, 4}; // The step value for each servo
 
 void setup()
 {
@@ -22,6 +22,9 @@ void setup()
     servos[i].attach(pins[i]);
     servos[i].write(startAngles[i]);
   }
+
+  Serial.begin(9600);
+
 }
 
 void loop()
@@ -36,6 +39,11 @@ void loop()
     {
       step[position] = -step[position]; // Reverse the step value
     }
+
+    Serial.println(step[position]);
+
   }
+
+
   delay(delayTime); // Delay of x ms between each loop
-}
+} 
