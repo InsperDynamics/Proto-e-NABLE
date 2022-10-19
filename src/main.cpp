@@ -1,16 +1,24 @@
-#include <SoftwareServo.h>
+#include <Arduino.h>
+#include <Servo.h>
 
 int delayTime = 24;              // The delay time between each step in milliseconds max (45)
 int updateList[] = {0, 2, 4, 6}; // Array containing the servos that should be updated in each loop (0-7)
 
-SoftwareServo servos[] = {{5, 90}, {6, 130}, {7, 90}, {8, 100}, {9, 90}, {10, 90}, {11, 90}, {12, 90}}; // The servos objects using the defined pins and initial angles {ping, angle}
+Servo servos[] = {Servo(), Servo(), Servo(), Servo(), Servo(), Servo(), Servo(), Servo()};
 
 uint8_t step[] = {4, 4, 4, 4, 4, 4, 4, 4}; // The step value for each servo
 
 void setup()
 {
-  // Serial.begin(115200); // Max baud rate for the serial monitor
-  Serial.begin(9600);
+  int pins[] = {5, 6, 7, 8, 9, 10, 11, 12}; // The pins used for the servos
+  int startAngles = {90, 130, 90, 100, 90, 90, 90, 90}; // The start angles for each servo
+
+  for (int i = 0; i < 8; i++)
+  
+  {
+    servos[i].attach(pins[i]);
+    servos[i].write(startAngles[i]);
+  }
 }
 
 void loop()
@@ -25,6 +33,4 @@ void loop()
     }
   }
   delay(delayTime); // Delay of x ms between each loop
-
-  SoftwareServo::refresh(); // Refresh all the servos and send them all the new angle values
 }
