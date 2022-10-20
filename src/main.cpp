@@ -1,49 +1,55 @@
 #include <Arduino.h>
 #include <Servo.h>
 
-int delayTime = 248;              // The delay time between each step in milliseconds max (45)
-int updateList[] = {0, 2, 4, 6}; // Array containing the servos that should be updated in each loop (0-7)
+// ####################################### START OF CONFIGURATION #######################################
 
-int minAngle = 40;  // The minimum angle of the servo
-int maxAngle = 170; // The maximum angle of the servo
+// Each servo and its start angle {ping, angle}
+int pins[][2] = {{5, 90}, {6, 130}, {7, 90}, {8, 100}, {9, 90}, {10, 90}, {11, 90}, {12, 90}};
 
-Servo servos[] = {Servo(), Servo(), Servo(), Servo(), Servo(), Servo(), Servo(), Servo()};
+// Array containing all servos that move, using the step values (0 - (size -1))
+int updateList[] = {0, 2, 4, 6};
 
-int8_t step[] = {4, 4, 4, 4, 4, 4, 4, 4}; // The step value for each servo
+// The step value for each servo, the amount of degrees it should move each loop
+int step[] = {4, 4, 4, 4, 4, 4, 4, 4};
+
+// The delay time between each step in milliseconds max
+int delayTime = 248;
+
+// The minimum angle of the servo
+int minAngle = 40;
+
+// The maximum angle of the servo
+int maxAngle = 170;
+
+// ####################################### END OF CONFIGURATION #######################################
+
+Servo servos[*(&pins + 1) - pins]; // Array containing all the servos of size pins
 
 void setup()
 {
-  int pins[] = {5, 6, 7, 8, 9, 10, 11, 12};               // The pins used for the servos
-  int startAngles[] = {90, 130, 90, 100, 90, 90, 90, 90}; // The start angles for each servo
-
-  for (int i = 0; i < 8; i++)
-
+  for (int i = 0; i < *(&pins + 1) - pins; i++)
   {
-    servos[i].attach(pins[i]);
-    servos[i].write(startAngles[i]);
+    Servo servo = Servo();
+
+    servo.attach(pins[i][0]); // Attach the servo to the pin
+    servo.write(pins[i][1]);  // Set the start angle for each servo
+
+    servos[i] = servo;
   }
-
-  Serial.begin(9600);
-
 }
 
 void loop()
 {
-  for (int position : updateList)
+  for (int servo : updateList)
   {
-    int angle = servos[position].read() + step[position];
+    int angle = servos[servo].read() + step[servo]; // Calculate the next angle value
 
-    servos[position].write(angle); // Update the servo position to the new angle
-
-    if (angle < minAngle || angle > maxAngle) // Check if step need to be inverted
+    if (angle < minAngle || angle > maxAngle) // If the angle is out of bounds
     {
-      step[position] = -step[position]; // Reverse the step value
+      step[servo] = -step[servo]; // Reverse the step value
+      angle -= 2 * step[servo];   // Calculate the next angle value
     }
-
-    Serial.println(step[position]);
-
+    servos[servo].write(angle); // Update the servo position to the new angle
   }
-
-
   delay(delayTime); // Delay of x ms between each loop
-} 
+}
