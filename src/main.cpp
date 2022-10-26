@@ -48,7 +48,6 @@ void loop()
     if (angle < minAngle || angle > maxAngle) // If the angle is out of bounds
     {
       step[servo] = -step[servo]; // Reverse the step value
-      angle -= 2 * step[servo];   // Calculate the next angle value
     }
     servos[servo].write(angle); // Update the servo position to the new angle
   }
