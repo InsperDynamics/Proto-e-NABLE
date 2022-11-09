@@ -5,7 +5,10 @@
 
 // Each servo and its start angle
 // Format: {ping, angle}
-int pins[][2] = {{5, 90}, {6, 130}, {7, 90}, {8, 100}, {9, 90}, {10, 90}, {11, 90}, {12, 90}};
+int pins[][2] = {{0, 90}, {1, 130}, {2, 90}, {3, 100}, {4, 90}, {11, 90}, {12, 90}, {13, 90}};
+// D0 to D3 send PWM signals to the servos
+// For next iteration: Try to reference pins as GPIO_<PIN_NAME>
+
 
 // Array containing all servos that move, using the step values 0 to (size -1)
 int updateList[] = {0, 2, 4, 6};
