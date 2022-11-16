@@ -4,20 +4,20 @@
 // ####################################### START OF CONFIGURATION #######################################
 
 // Each servo and its start angle
-// Format: {ping, angle}
-int pins[][2] = {{0, 90}, {1, 130}, {2, 90}, {3, 100}, {4, 90}, {11, 90}, {12, 90}, {13, 90}};
-// D0 to D3 send PWM signals to the servos
-// For next iteration: Try to reference pins as GPIO_<PIN_NAME>
-
+// Format: {pin, angle}
+// Uno
+int pins[][2] = {{PIN0, 90}, {PIN1, 90}, {PIN2, 90}, {PIN3, 90}};
+// Nano
+//int pins[][2] = {{PIN2, 90}, {PIN3, 130}, {PIN4, 90}, {PIN5, 100}};
 
 // Array containing all servos that move, using the step values 0 to (size -1)
-int updateList[] = {0, 2, 4, 6};
+int updateList[] = {0, 2};
 
 // The step value for each servo, the amount of degrees it should move each loop
-int step[] = {4, 4, 4, 4, 4, 4, 4, 4};
+int step[] = {1, 1, 1, 1, 1, 1, 1, 1};
 
 // The delay time between each step in milliseconds
-int delayTime = 248;
+int delayTime = 62;
 
 // The minimum angle of the servo
 int minAngle = 40;
