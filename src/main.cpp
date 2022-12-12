@@ -6,12 +6,14 @@
 // Each servo and its start angle
 // Format: {pin, angle}
 // Uno
-int pins[][2] = {{PIN0, 90}, {PIN1, 90}, {PIN2, 90}, {PIN3, 90}, {PIN4, 90}, {PIN5, 130}};
+//int pins[][2] = {{PIN0, 90}, {PIN1, 90}, {PIN2, 90}, {PIN3, 90}, {PIN4, 90}, {PIN5, 130}};
 // Nano
 //int pins[][2] = {{PIN2, 90}, {PIN3, 130}, {PIN4, 90}, {PIN5, 100}};
+// Mega
+int pins[][2] = {{PIN0, 90}, {PIN1, 90}, {PIN2, 90}, {PIN3, 90}, {PIN4, 90}, {PIN5, 90}, {PIN6, 90}, {PIN7, 90}};
 
 // Array containing all servos that move, using the step values 0 to (size -1)
-int updateList[] = {0, 2, 4};
+int updateList[] = {0, 2, 4, 6};
 
 // The step value for each servo, the amount of degrees it should move each loop
 int step[] = {1, 1, 1, 1, 1, 1, 1, 1};
