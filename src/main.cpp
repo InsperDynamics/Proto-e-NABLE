@@ -13,10 +13,12 @@
 int pins[][2] = {{PIN0, 0}, {PIN1, 90}, {PIN2, 130}, {PIN3, 90}, {PIN4, 100}, {PIN5, 90}, {PIN6, 180}, {PIN7, 0}};
 
 // Array containing all servos that move, using the step values 0 to (size -1)
+
+//int updateList[] = {1,3,5};
 int updateList[] = {0,2,4,6};
 
 // The step value for each servo, the amount of degrees it should move each loop
-int step[] = {-1, 1, 1, 1, 1, 1, -1, 1};
+int step[] = {-2, 2, 2, 2, 2, 2, -2, 2};
 
 // The delay time between each step in milliseconds
 int delayTime = 62;
